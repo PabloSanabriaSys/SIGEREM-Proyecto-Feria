@@ -10,6 +10,7 @@ export default function NavBar() {
     { label: 'INTENTALO', path: '/intentalo' },
     { label: 'SOBRE NOSOTROS', path: '/aboutus' },
     { label: 'CONTACTANOS', path: '/contact' }
+    
   ];
 
   return (
