@@ -8,7 +8,9 @@
 ### Backend (Fast API)
 
 1. Abra otra terminal y navegue a la carpeta del Backend: `cd backend`.
-2. Instale las librerías necesarias. `pip install -r requirements.txt`.
+2. Cree un entorno virtual: `python -m venv venv`.
+3. Active el entorno virtual: `venv\Scripts\activate`.
+4. Instale las librerías necesarias: `pip install -r requirements.txt`.
 
 ### Ejecución
 
