@@ -5,7 +5,7 @@
 1. Abra la terminal y navegue a la carpeta del Frontend: `cd frontend`.
 2. Instale las dependencias utilizando el comando: `npm install`.
 
-### Backend (Flask)
+### Backend (Fast API)
 
 1. Abra otra terminal y navegue a la carpeta del Backend: `cd backend`.
 2. Instale las librerías necesarias. `pip install -r requirements.txt`.
