@@ -13,6 +13,7 @@ import Intentalo from './pages/Intentalo';
 import Nosotros from './pages/Nosotros';
 import Contactanos from './pages/Contactanos';
 import Home from './pages/Home';
+import VerGesto from './pages/VerGesto';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
         {
           path: "gestos",
           element: <Gestos />,
+          
         },
         {
           path: "intentalo",
@@ -39,6 +41,10 @@ const router = createBrowserRouter([
         {
           path: "contact",
           element: <Contactanos/>
+        },
+        {
+          path:"gestos/:id",
+          element:<VerGesto/>
         }
         
       ]
@@ -47,8 +53,6 @@ const router = createBrowserRouter([
 
 ]);
 function App() {
-  //const [count, setCount] = useState(0)
-
   return (
     <>
       <RouterProvider router={router} />
