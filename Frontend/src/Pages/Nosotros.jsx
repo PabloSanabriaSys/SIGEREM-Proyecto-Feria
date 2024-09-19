@@ -3,30 +3,59 @@ import React, { useEffect, useRef, useState } from "react";
 const Nosotros = () => {
   const WS_URL = "ws://127.0.0.1:8000/ws/2";
   const connection = useRef(null);
+  const videoRef = useRef(null);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    const socket = new WebSocket(WS_URL);
-    connection.current = socket;
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then((stream) => {
+        videoRef.current.srcObject = stream;
+        videoRef.current.play();
 
-    socket.addEventListener("open", (e) => {
-      console.log("connection established");
-      for(let i=0; i<10; i++) socket.send("connection established"+i);
-    });
+        connection.current = new WebSocket(WS_URL);
 
-    socket.addEventListener("message", (e) => {
-      console.log("message recieved from server ", e.data);
+        connection.current.onopen = () => {
+          console.log("Websocket connected");
+        };
 
-      setMessage(e.data);
-    });
+        connection.onerror = (error) => {
+          console.error("Error en Websocket", error);
+        };
 
-    socket.addEventListener("close", () => {
-      console.log("conexion cerrada");
-    });
+        const captureFrames = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = videoRef.current.videoWidth;
+          canvas.height = videoRef.current.videoHeight;
 
-    socket.addEventListener("error", (error) => {
-      console.error("websocket error: ", error);
-    });
+          const ctx = canvas.getContext("2d");
+
+          const sendFrame = () => {
+            ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+            canvas.toBlob((blob) => {
+              if (
+                connection.current &&
+                connection.current.readyState === WebSocket.OPEN
+              ) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                  connection.current.send(reader.result);
+                };
+                reader.readAsDataURL(blob);
+              }
+            }, "image/jpeg");
+
+            setTimeout(sendFrame, 100);
+          };
+
+          sendFrame();
+        };
+
+        captureFrames();
+      })
+      .catch((error) => {
+        console.error("Error accessing camera", error);
+      });
 
     return () => {
       if (connection.current) {
@@ -38,8 +67,7 @@ const Nosotros = () => {
   return (
     <div className="bg-background">
       <h1>Nosotros</h1>
-      <span>Message: </span>
-      <span>{message}</span>
+      <video ref={videoRef} autoPlay muted></video>
     </div>
   );
 };
