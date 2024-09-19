@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from src.controllers import user_controllers, websocket_controller
+from controllers import user_controllers, websocket_controller
 
 app = FastAPI()
 
