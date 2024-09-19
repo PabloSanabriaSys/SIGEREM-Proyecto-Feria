@@ -14,8 +14,8 @@ export default function NavBar() {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-md">
-      <div className="w-full text-gray-700 bg-white dark:text-gray-200 dark:bg-gray-800">
+    <div className="fixed top-0 left-0 right-0 z-50 shadow-md">
+      <div className="w-full text-gray-700 dark:text-gray-200 bg-background">
         <div className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
           <div className="flex flex-row items-center justify-between p-4">
             <Link

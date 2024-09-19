@@ -6,12 +6,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import './App.css'
-import InitPage from './Pages/InitPage';
+import InitPage from './pages/InitPage';
+
+import Gestos from './pages/Gestos';
+import Intentalo from './pages/Intentalo';
+import Nosotros from './pages/Nosotros';
+import Contactanos from './pages/Contactanos';
 import Home from './Pages/Home';
-import Gestos from './Pages/Gestos';
-import Intentalo from './Pages/Intentalo';
-import Nosotros from './Pages/Nosotros';
-import Contactanos from './Pages/Contactanos';
 
 const router = createBrowserRouter([
   {
