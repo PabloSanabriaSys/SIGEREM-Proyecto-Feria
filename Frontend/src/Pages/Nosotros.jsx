@@ -11,11 +11,12 @@ const Nosotros = () => {
 
     socket.addEventListener("open", (e) => {
       console.log("connection established");
-      socket.send("connection established");
+      for(let i=0; i<10; i++) socket.send("connection established"+i);
     });
 
     socket.addEventListener("message", (e) => {
       console.log("message recieved from server ", e.data);
+
       setMessage(e.data);
     });
 
