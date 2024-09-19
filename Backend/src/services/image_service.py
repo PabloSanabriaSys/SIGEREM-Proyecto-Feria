@@ -45,10 +45,10 @@ class ImageService:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"image_{timestamp}.png"
         filepath = os.path.join(self.UPLOAD_DIR, filename)
+        image_data = base64.b64decode(image_base64)
         
         try:
             with open(filepath, "wb") as f:
-                image_data = base64.b64decode(image_base64)
                 f.write(image_data)
             logger.info(f"Imagen guardada: {filepath}")
             return filename

@@ -27,9 +27,9 @@ async def websocket_endpoint(websocket: WebSocket):
         while True:
             data = await websocket.receive_text()
             print(data)
-            #image.process_image(data)
-            #filename = await image.save_image(data)
-            #print(f"Imagen guardada como: {filename}")
+
+            filename = await image.save_image_base64(data)
+            print(f"Imagen guardada como: {filename}")
             await manager.broadcast("Imagen Recibida")
     except:
         await manager.broadcast("Conexion fallida")
