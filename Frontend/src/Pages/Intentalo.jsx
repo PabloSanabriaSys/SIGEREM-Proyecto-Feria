@@ -2,7 +2,7 @@ import React from 'react';
 
 const Intentalo = () => {
   return (
-    <div className={`min-h-screen bg-slate-100 dark:bg-slate-900`}>
+    <div className="bg-background">
       <h1>Intentalo</h1>
     </div>
     

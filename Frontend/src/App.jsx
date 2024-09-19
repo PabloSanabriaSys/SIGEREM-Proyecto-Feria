@@ -12,15 +12,16 @@ import Gestos from './pages/Gestos';
 import Intentalo from './pages/Intentalo';
 import Nosotros from './pages/Nosotros';
 import Contactanos from './pages/Contactanos';
-import Home from './Pages/Home';
+import Home from './pages/Home';
 
 const router = createBrowserRouter([
   {
     path: "/",
       element: <InitPage />,
+
       children: [
         {
-          path: "home",
+          path: "",
           element: <Home />,
         },
         {
