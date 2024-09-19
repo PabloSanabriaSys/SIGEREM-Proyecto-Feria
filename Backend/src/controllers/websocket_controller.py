@@ -15,14 +15,9 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
             print(data)
             await manager.broadcast(f"Cliente #{client_id} dice: {data}")
     except:
-        await manager.broadcast(f"Cliente #{client_id} dejó el chat")
-    finally:
         manager.disconnect(websocket)
+        await manager.broadcast(f"Cliente #{client_id} dejó el chat")
         
-        
-        
-        
-
     
     
 @router.websocket("/ws/save_image")
@@ -30,11 +25,13 @@ async def websocket_endpoint(websocket: WebSocket):
     await manager.connect(websocket)
     try:
         while True:
-            data = await websocket.receive()
+            data = await websocket.receive_text()
             print(data)
             #image.process_image(data)
-            await manager.broadcast(f"Imagen Recibida")
+            #filename = await image.save_image(data)
+            #print(f"Imagen guardada como: {filename}")
+            await manager.broadcast("Imagen Recibida")
     except:
-        await manager.broadcast(f"Conexion fallida")
+        await manager.broadcast("Conexion fallida")
     finally:
         manager.disconnect(websocket)

@@ -4,6 +4,7 @@ import asyncio
 import os
 from datetime import datetime
 import logging
+import base64
 
 # Configuración de logging
 logging.basicConfig(level=logging.INFO)
@@ -24,7 +25,6 @@ class ImageService:
             return output.getvalue()
     
     
-    
     async def save_image(self, image_bytes: bytes) -> str:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"image_{timestamp}.png"
@@ -35,6 +35,24 @@ class ImageService:
                 f.write(image_bytes)
             logger.info(f"Imagen guardada: {filepath}")
             return filename
+        
+        except Exception as e:
+            logger.error(f"Error al guardar la imagen: {str(e)}")
+            raise
+        
+        
+    async def save_image_base64(self, image_base64: str) -> str:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"image_{timestamp}.png"
+        filepath = os.path.join(self.UPLOAD_DIR, filename)
+        
+        try:
+            with open(filepath, "wb") as f:
+                image_data = base64.b64decode(image_base64)
+                f.write(image_data)
+            logger.info(f"Imagen guardada: {filepath}")
+            return filename
+        
         except Exception as e:
             logger.error(f"Error al guardar la imagen: {str(e)}")
             raise
