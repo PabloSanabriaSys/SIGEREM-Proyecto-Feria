@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ChangeStyle from './ChangeStyle';
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const navItems = [
     
-    { label: 'INICIO', path: '/home' },
+    { label: 'INICIO', path: '/' },
     { label: 'GESTOS', path: '/gestos' },
     { label: 'INTENTALO', path: '/intentalo' },
     { label: 'SOBRE NOSOTROS', path: '/aboutus' },
@@ -19,10 +20,10 @@ export default function NavBar() {
         <div className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
           <div className="flex flex-row items-center justify-between p-4">
             <Link
-              to="/home"
+              to="/"
               className="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline"
             >
-              SIGEREM
+              SIREGEM
             </Link>
             
             <button
@@ -62,6 +63,7 @@ export default function NavBar() {
               </Link>
             ))}
           </nav>
+          <ChangeStyle/>
         </div>
       </div>
     </div>
