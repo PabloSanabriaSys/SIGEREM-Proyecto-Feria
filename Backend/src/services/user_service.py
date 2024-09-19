@@ -1,5 +1,5 @@
-from src.models.user import User
-from src.schemas.user import UserCreate
+from models.user import User
+from schemas.user import UserCreate
 
 class UserService:
     @staticmethod

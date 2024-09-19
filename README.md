@@ -15,4 +15,4 @@
 ### Ejecución
 
 1. En la terminal del Frontend, ejecute el proyecto React con el comando: `npm run dev`.
-2. En la terminal del Backend, inicie el servidor Flask con: `uvicorn src.main:app --reload`.
+2. En la terminal del Backend, inicie el servidor Flask con: `fastapi dev src/main.py`.

@@ -28,5 +28,6 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
             data = await websocket.receive_text()
             await manager.broadcast(f"Cliente #{client_id} dice: {data}")
     except:
-        manager.disconnect(websocket)
         await manager.broadcast(f"Cliente #{client_id} dejó el chat")
+    finally:
+        manager.disconnect(websocket)
