@@ -38,7 +38,7 @@ const Intentalo = () => {
                     <CameraRecognition prediccion={prediccion} setPrediccion={setPrediccion} />
                 </div>
                 <div className="flex  flex-col justify-center items-center italic">
-                    <h1 className='items-center'>Imite la imagen que se encuentra abajo 👇</h1>
+                    <h1 className='items-center'></h1>
                     <img
                         className="border-double border-4 border-yellow-400 rounded-lg "
                         alt={title}
