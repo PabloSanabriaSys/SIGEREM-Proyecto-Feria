@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { ScanEye } from "lucide-react";
 
 const VideoDialog = ({ triggerText, videoUrl, videoTitle }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,7 +9,9 @@ const VideoDialog = ({ triggerText, videoUrl, videoTitle }) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="rounded-full" variant="outline">{triggerText}</Button>
+        <Button className="rounded-full" variant="outline">{triggerText}
+          <ScanEye className=''/>
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[800px] p-0">
         <div className="aspect-video relative">

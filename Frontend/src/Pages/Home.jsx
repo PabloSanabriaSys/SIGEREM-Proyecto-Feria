@@ -1,10 +1,11 @@
 import CardFlipImages from "../components/CardFlipImages";
 import VideoDialog from "../components/VideoDialog";
 
+
 export default function Home() {
   return (
     <div className=" p-0 w-full bg-background">
-      <div className="bg-black grid grid-cols-1 md:grid-cols-2">
+      <div className="bg-black h-screen grid grid-cols-1 md:grid-cols-2">
           <div className="p-4 flex flex-col justify-center items-start text-center md:text-left">
             <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white">
               Reconocimiento y
@@ -20,7 +21,7 @@ export default function Home() {
             </p>
             <div className="flex items-center justify-center py-4">
               <VideoDialog 
-                triggerText="CONOCE SIGEREM "
+                triggerText="CONOCE SIGEREM  " 
                 videoUrl="https://www.youtube.com/embed/-CveDyA8PQU?autoplay=1"  
                 videoTitle="Revolucionando el Entrenamiento Militar 2024-09-26"
               />
@@ -33,15 +34,13 @@ export default function Home() {
             </video>
           </div>
       </div>
-      <div className="py-4 ">
-        <div className="bg-gray-950 p-4 flex flex-col justify-center items-around  md:text-left">
-          <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white text-center py-6">
-            ALGUNOS DATOS GENERALES
-          </h1>
-          <CardFlipImages/>
-        </div>
+      <div className="h-screen bg-gray-950 p-4 flex flex-col justify-center items-around  md:text-left">
+        <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white text-center py-10">
+          ALGUNOS DATOS GENERALES
+        </h1>
+        <CardFlipImages/>
+      </div> 
         
-      </div>
     </div>
   );
 }
