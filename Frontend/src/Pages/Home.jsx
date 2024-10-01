@@ -1,28 +1,47 @@
-import { CarruselImagenes } from "../components/CarruselImagenes"
+import CardFlipImages from "../components/CardFlipImages";
+import VideoDialog from "../components/VideoDialog";
 
 export default function Home() {
   return (
-    <div className="bg-background">
-      <div className=" grid justify-items-center p-6">
-        <div className="flex flex-col items-center md: px-6">
-          <h1 className="text-3xl text-center font-bold sm:text-4xl md:text-5xl lg:text-6xl/none">
-            Sistema de Reconocimiento y Entrenamiento de Gestos Militares
-          </h1>
-          <p className="mx-auto  md:text-xl py-4">
-            Mejorando la instrucción militar con inteligencia artificial y realidad virtual
-          </p>
-        </div>
+    <div className=" p-0 w-full bg-background">
+      <div className="bg-black grid grid-cols-1 md:grid-cols-2">
+          <div className="p-4 flex flex-col justify-center items-start text-center md:text-left">
+            <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white">
+              Reconocimiento y
+              <br className="sm:block hidden" />{" "}
+              <span className="bg-gradient-to-t from-blue-500 via-sky-300 to-teal-100 bg-clip-text text-transparent">
+                Entrenamiento de
+              </span>{" "}
+              <br className="sm:block hidden" />{" "}
+              Gestos Militares
+            </h1>
+            <p className="mt-4 w-full md:w-3/4 text-justify font-mono text-lg sm:text-xl text-white">
+              Mejorando la instrucción militar con inteligencia artificial y realidad virtual
+            </p>
+            <div className="flex items-center justify-center py-4">
+              <VideoDialog 
+                triggerText="CONOCE SIGEREM "
+                videoUrl="https://www.youtube.com/embed/-CveDyA8PQU?autoplay=1"  
+                videoTitle="Revolucionando el Entrenamiento Militar 2024-09-26"
+              />
+            </div>
+          </div>
+          <div className="grid justify-items-center p-4">
+            <video className="w-full sm:max-w-xs md:max-w-md lg:max-w-lg h-auto" autoPlay loop muted>
+              <source src="https://video.wixstatic.com/video/61098f_2eab1bc7d0b9424cad87d3965803bf52/720p/mp4/file.mp4" type="video/mp4" />
+              Tu navegador no soporta el elemento de video.
+            </video>
+          </div>
       </div>
-
-      <div className="grid grid-cols-2">
-        <div className=" grid justify-items-center">
-          <h1> carrusel</h1>
-          <CarruselImagenes/>
+      <div className="py-4 ">
+        <div className="bg-gray-950 p-4 flex flex-col justify-center items-around  md:text-left">
+          <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white text-center py-6">
+            ALGUNOS DATOS GENERALES
+          </h1>
+          <CardFlipImages/>
         </div>
-        <div>
-          <h1>textp</h1>
-        </div>
+        
       </div>
     </div>
-  )
+  );
 }
