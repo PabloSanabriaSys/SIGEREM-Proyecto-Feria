@@ -4,12 +4,13 @@ import { Outlet } from 'react-router-dom';
 
 const InitPage = () => {
   return (
-    <div className={`min-h-screen bg-background`}>
+    <div className="flex min-h-screen bg-slate-300 dark:bg-slate-800">
       <NavBar/>
       <main className="pt-16 z-10 overflow-auto min-h-full w-full ">
         <Outlet />
       </main>
     </div>
+    
     
   );
 };

@@ -7,13 +7,12 @@ import {
 } from "react-router-dom";
 import './App.css'
 import InitPage from './pages/InitPage';
-
 import Gestos from './pages/Gestos';
 import Intentalo from './pages/Intentalo';
 import Nosotros from './pages/Nosotros';
 import Contactanos from './pages/Contactanos';
-import Home from './pages/Home';
 import VerGesto from './pages/VerGesto';
+import Home from './Pages/Home';
 
 const router = createBrowserRouter([
   {
