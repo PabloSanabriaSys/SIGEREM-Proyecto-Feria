@@ -1,75 +1,134 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
+import Webcam from "react-webcam";
+import { Camera } from "@mediapipe/camera_utils";
+import { FACEMESH_TESSELATION, HAND_CONNECTIONS, Holistic } from '@mediapipe/holistic';
+import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 
-const Nosotros = () => {
-  const WS_URL = "ws://127.0.0.1:8000/ws/2";
-  const connection = useRef(null);
-  const videoRef = useRef(null);
-  const [message, setMessage] = useState("");
+const RecognitionGesture = () => {
+  const webcamRef = useRef(null);
+  const canvasRef = useRef(null);
+  const [showPoints, setShowPoints] = useState(true);
+
+  const onResults = (results) => {
+    if (!webcamRef.current?.video || !canvasRef.current) return;
+    const videoWidth = webcamRef.current.video.videoWidth;
+    const videoHeight = webcamRef.current.video.videoHeight;
+    canvasRef.current.width = videoWidth;
+    canvasRef.current.height = videoHeight;
+
+    const canvasElement = canvasRef.current;
+    const canvasCtx = canvasElement.getContext("2d");
+    if (canvasCtx == null) throw new Error('Could not get context');
+    canvasCtx.save();
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+    canvasCtx.globalCompositeOperation = 'source-in';
+    canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
+
+    canvasCtx.globalCompositeOperation = 'destination-atop';
+    canvasCtx.drawImage(
+      results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+    canvasCtx.globalCompositeOperation = 'source-over';
+
+    if (showPoints) {
+      // Draw hands
+      drawConnectors(canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS,
+        {color: '#CC0000', lineWidth: 5});
+      drawLandmarks(canvasCtx, results.leftHandLandmarks,
+        {color: '#00FF00', lineWidth: 2});
+      drawConnectors(canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS,
+        {color: '#00CC00', lineWidth: 5});
+      drawLandmarks(canvasCtx, results.rightHandLandmarks,
+        {color: '#FF0000', lineWidth: 2});
+
+      // Draw nose and mouth points
+      if (results.faceLandmarks) {
+        const nose = results.faceLandmarks[4];
+        const mouth = results.faceLandmarks[0];
+
+        canvasCtx.fillStyle = 'blue';
+        canvasCtx.beginPath();
+        canvasCtx.arc(nose.x * canvasElement.width, nose.y * canvasElement.height, 5, 0, 5 * Math.PI);
+        canvasCtx.fill();
+
+        canvasCtx.fillStyle = 'yellow';
+        canvasCtx.beginPath();
+        canvasCtx.arc(mouth.x * canvasElement.width, mouth.y * canvasElement.height, 5, 0, 5 * Math.PI);
+        canvasCtx.fill();
+      }
+    }
+
+    canvasCtx.restore();
+  }
 
   useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then((stream) => {
-        videoRef.current.srcObject = stream;
-        videoRef.current.play();
-
-        connection.current = new WebSocket(WS_URL);
-
-        connection.current.onopen = () => {
-          console.log("Websocket connected");
-        };
-
-        connection.onerror = (error) => {
-          console.error("Error en Websocket", error);
-        };
-
-        const captureFrames = () => {
-          const canvas = document.createElement("canvas");
-          canvas.width = videoRef.current.videoWidth;
-          canvas.height = videoRef.current.videoHeight;
-
-          const ctx = canvas.getContext("2d");
-
-          const sendFrame = () => {
-            ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-            canvas.toBlob((blob) => {
-              if (
-                connection.current &&
-                connection.current.readyState === WebSocket.OPEN
-              ) {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                  connection.current.send(reader.result);
-                };
-                reader.readAsDataURL(blob);
-              }
-            }, "image/jpeg");
-
-            setTimeout(sendFrame, 100);
-          };
-
-          sendFrame();
-        };
-
-        captureFrames();
-      })
-      .catch((error) => {
-        console.error("Error accessing camera", error);
-      });
-
-    return () => {
-      if (connection.current) {
-        connection.current.close();
+    const holistic = new Holistic({
+      locateFile: (file) => {
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/holistic/${file}`;
       }
-    };
-  }, [WS_URL]);
+    });
+    holistic.setOptions({
+      selfieMode: true,
+      modelComplexity: 1,
+      smoothLandmarks: true,
+      enableSegmentation: true,
+      smoothSegmentation: true,
+      refineFaceLandmarks: true,
+      minDetectionConfidence: 0.5,
+      minTrackingConfidence: 0.5
+    });
+    holistic.onResults(onResults);
+
+    if (webcamRef.current && webcamRef.current.video) {
+      const camera = new Camera(webcamRef.current.video, {
+        onFrame: async () => {
+          if (webcamRef.current && webcamRef.current.video) {
+            await holistic.send({image: webcamRef.current.video});
+          }
+        },
+        width: 640,
+        height: 480,
+      });
+      camera.start();
+    }
+  }, [showPoints]);
 
   return (
-    <div className="bg-background">
-      <h1>Nosotros</h1>
-      <video ref={videoRef} autoPlay muted></video>
+    <div className="relative">
+      <Webcam
+        ref={webcamRef}
+        style={{
+          position: "absolute",
+          marginLeft: "auto",
+          marginRight: "auto",
+          left: 0,
+          right: 0,
+          textAlign: "center",
+          zIndex: 9,
+          width: 640,
+          height: 480,
+        }}
+      />
+      <canvas
+        ref={canvasRef}
+        style={{
+          position: "absolute",
+          marginLeft: "auto",
+          marginRight: "auto",
+          left: 0,
+          right: 0,
+          textAlign: "center",
+          zIndex: 9,
+          width: 640,
+          height: 480,
+        }}
+      />
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center bg-white p-2 rounded">
+        <span className="mr-2">Mostrar puntos:</span>
+      </div>
     </div>
   );
-};
+}
 
-export default Nosotros;
+export default RecognitionGesture;
