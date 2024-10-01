@@ -4,69 +4,69 @@ const files = [
     {
         title: 'DISTANCIA O ALZA DE COMBATE',
         url: 'figura34',
-        source: "../public/images/FigurasMil/figura34.png"
+        source: "/images/FigurasMil/figura34.png"
     },
       
     {
         title: 'GIRAR A LA DERECHA O COLUMNA DERECHA',
         url: 'figura68',
-        source: "../public/images/FigurasMil/figura68.png"
+        source: "/images/FigurasMil/figura68.png"
     },
     {
         title: 'GIRAR A LA IZQUIERDA O COLUMNA IZQUIERDA',
         url: 'figura69',
-        source: "../public/images/FigurasMil/figura69.png"
+        source: "/images/FigurasMil/figura69.png"
     },
     
     {
         title: 'ALTO O DETENGANSE',
         url: 'figura9',
-        source:"../public/images/FigurasMil/figura9.png"
+        source:"/images/FigurasMil/figura9.png"
     },
     {
         title: 'EN CONOCIMIENTO, AFIRMATIVO O LISTO ',
         url: 'figura130',
-        source: "../public/images/FigurasMil/figura130.png"
+        source: "/images/FigurasMil/figura130.png"
     },
     {
         title: 'SEÑAL NEGATIVA ',
         url: 'figura131',
-        source: "../public/images/FigurasMil/figura131.png"
+        source: "/images/FigurasMil/figura131.png"
     },
     {
         title: 'CONTINUACIÓN',
         url: 'figura166',
-        source: "../public/images//FigurasMil/figura166.png"
+        source: "/images//FigurasMil/figura166.png"
     },
     {
         title: 'GIRO A LA DERECHA O IZQUIERDA',
         url: 'figura8',
-        source: "../public/images/FigurasMil/figura8.png"
+        source: "/images/FigurasMil/figura8.png"
     },
     {
         title: 'FORMACIÓN EN "V"',
         url: 'figura19',
-        source: "../public/images/FigurasMil/figura19.png"
+        source: "./images/FigurasMil/figura19.png"
     },
     {
         title: 'FORMACIÓN EN CUÑA',
         url: 'figura20',
-        source: "../public/images/FigurasMil/figura20.png"
+        source: "/images/FigurasMil/figura20.png"
     },
     {
         title: 'FORMACIÓN ESCALONADA A LA DERECHA',
         url: 'figura21',
-        source: "../public/images/FigurasMil/figura21.png"
+        source: "/images/FigurasMil/figura21.png"
     },
     {
         title: 'APAGAR LUCES',
         url: 'figura56',
-        source: "../public/images/FigurasMil/figura56.png"
+        source: "/images/FigurasMil/figura56.png"
     },
     {
         title: 'ENCENDER LUCES',
         url: 'figura57',
-        source: "../public/images/FigurasMil/figura57.png"
+        source: "/images/FigurasMil/figura57.png"
     },
    
 ]
