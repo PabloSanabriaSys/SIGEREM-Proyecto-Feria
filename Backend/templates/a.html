@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Reconocimiento de Gestos</title>
+</head>
+<body>
+    <h1>Prueba de Reconocimiento de Gestos</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <p>Predicción: <span id="prediccion">-</span></p>
+
+    <script>
+        const video = document.getElementById('video');
+        const prediccionSpan = document.getElementById('prediccion');
+        let ws;
+
+        async function setupCamera() {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+        }
+
+        function setupWebSocket() {
+            ws = new WebSocket('ws://localhost:8000/recognition');
+            
+            ws.onopen = () => {
+                console.log('Conectado al servidor WebSocket');
+                setInterval(sendFrame, 100);  // Enviar un frame cada 100ms
+            };
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                prediccionSpan.textContent = data.prediccion;
+            };
+
+            ws.onerror = (error) => {
+                console.error('Error en WebSocket:', error);
+            };
+
+            ws.onclose = () => {
+                console.log('Desconectado del servidor WebSocket');
+            };
+        }
+
+        function sendFrame() {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            const imageData = canvas.toDataURL('image/jpeg');
+            ws.send(imageData);
+        }
+
+        setupCamera();
+        setupWebSocket();
+    </script>
+</body>
+</html>

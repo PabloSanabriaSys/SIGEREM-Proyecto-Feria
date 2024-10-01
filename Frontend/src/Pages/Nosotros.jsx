@@ -23,8 +23,9 @@ const Nosotros = () => {
           console.error("Error en Websocket", error);
         };
 
+        const canvas = document.createElement("canvas");
+
         const captureFrames = () => {
-          const canvas = document.createElement("canvas");
           canvas.width = videoRef.current.videoWidth;
           canvas.height = videoRef.current.videoHeight;
 
