@@ -65,7 +65,6 @@ const CameraRecognition = ({prediccion, setPrediccion}) => {
 
   return (
     <div className="bg-background">
-      <h1>Prueba de Reconocimiento de Gestos</h1>
       {isCapturing && (
         <Webcam
           audio={false}
