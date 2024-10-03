@@ -1,7 +1,8 @@
 import CardFlipImages from "../components/CardFlipImages";
+import NeuralNetworkAnimation from "../components/general/NeuralNetworkAnimation";
 import VideoDialog from "../components/VideoDialog";
-
-
+import { animationSiregem } from "../components/constants/AnimationSiregem";
+import { neuronas } from "../components/constants/Neuronas";
 export default function Home() {
   return (
     <div className=" p-0 w-full bg-background">
@@ -34,13 +35,21 @@ export default function Home() {
           </video>
         </div>
       </div>
-      <div className="h-screen bg-gray-950 p-4 flex flex-col justify-center items-around  md:text-left">
-        <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white text-center py-10">
-          ALGUNOS DATOS GENERALES
-        </h1>
-        <CardFlipImages />
-      </div>
+      <div className="relative h-screen bg-gray-950 p-4 flex flex-col justify-center items-center md:text-left">
+        {/* Componente NeuralNetworkAnimation en el fondo */}
+        <div className="absolute inset-0 z-0  ">
+          <NeuralNetworkAnimation circles={neuronas}/>
+        </div>
 
+        {/* Contenido superpuesto (h1 y CardFlipImages) */}
+        <div className="relative z-10">
+          <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white text-center py-10">
+            ALGUNOS DATOS GENERALES
+          </h1>
+          <CardFlipImages />
+        </div>
+      </div>
+        
     </div>
   );
-}
+} 
