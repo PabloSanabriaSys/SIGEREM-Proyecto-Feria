@@ -33,9 +33,8 @@ const equipo = [
 ];
 const Nosotros = () => {
   return(
-    <div className=' flex justify-around py-10'>
-        <div className=" bg-gradient-to-l from-slate-500 dark:bg-slate-800  max-w-3xl xl:px-20 dark:border-slate-500 border-2 border-gray-800 rounded-3xl px-10 py-10 lg:py-10 mx-10">
-          
+    <div className=' flex justify-around py-10 bg-background'>
+        <div className=" bg-background  max-w-3xl xl:px-20 dark:border-slate-500 border-2 border-gray-800 rounded-3xl px-10 py-10 lg:py-10 mx-10">
           <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
             <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">NUESTRO EQUIPO </h2>
           </div>
