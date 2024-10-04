@@ -33,32 +33,35 @@ const equipo = [
 ];
 const Nosotros = () => {
   return(
-    <div className=' flex justify-around py-10'>
-        <div className=" bg-gradient-to-l from-slate-500 dark:bg-slate-800  max-w-3xl xl:px-20 dark:border-slate-500 border-2 border-gray-800 rounded-3xl px-10 py-10 lg:py-10 mx-10">
-          
-          <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
-            <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">NUESTRO EQUIPO </h2>
-          </div>
+    <div className=' p-0 w-full bg-background grid justify-items-center content-center'>
+        <div className=" h-screen max-w-3xl xl:px-20 p-4  ">
+          <div className='rounded-lg border-2 bg-slate-950  dark:border-white p-2
+      shadow-[0_0_15px_5px_rgba(255,255,255,0.6)] transition-all duration-300 bg-gray-90'>
+            <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+              <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">NUESTRO EQUIPO </h2>
+            </div>
 
-          <div className="flex flex-wrap justify-center gap-4">
-            {equipo.map((member, index) => (
-              <div key={index} className="text-center">
-                <img
-                  className="rounded-xl sm:size-48 lg:size-40 mx-auto"
-                  src={member.src}
-                  alt={member.alt}
-                />
-                <div className="mt-2 sm:mt-4">
-                  <h3 className="text-sm font-medium text-gray-800 sm:text-base lg:text-lg dark:text-neutral-200">
-                    {member.name}
-                  </h3>
-                  <p className="text-xs text-gray-600 sm:text-sm lg:text-base dark:text-neutral-400">
-                    {member.role}
-                  </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              {equipo.map((member, index) => (
+                <div key={index} className="text-center">
+                  <img
+                    className="rounded-xl size-52 sm:size-48 lg:size-40 mx-auto"
+                    src={member.src}
+                    alt={member.alt}
+                  />
+                  <div className="mt-2 sm:mt-4">
+                    <h3 className="text-sm font-medium text-gray-800 sm:text-base lg:text-lg dark:text-neutral-200">
+                      {member.name}
+                    </h3>
+                    <p className="text-xs text-gray-600 sm:text-sm lg:text-base dark:text-neutral-400">
+                      {member.role}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+          
         </div>
     </div>
   );

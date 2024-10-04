@@ -27,7 +27,7 @@ const Intentalo = () => {
     return (
         <div className="bg-background p-4 min-h-screen">
             <h1 className="text-2xl text-center font-bold sm:text-3xl md:text-4xl lg:text-5xl/none p-4">
-                Realiza un Gesto!
+                REALIZA UN GESTO!
             </h1>
 
             <div className='grid  md:grid-cols-2  justify-items-center'>
@@ -41,7 +41,7 @@ const Intentalo = () => {
                     <h1 className='items-center'></h1>
                     {prediccion != 0 ?
                         <img
-                            className="border-double border-4 border-yellow-400 rounded-lg "
+                            className=" border-4 border-white shadow-[0_0_15px_5px_rgba(255,255,255,0.6)] transition-all duration-300 bg-gray-90 rounded-lg w-full h-auto "
                             alt={title}
                             src={`/images/FigurasMil/${nombre[prediccion]}.png`}
                         />
