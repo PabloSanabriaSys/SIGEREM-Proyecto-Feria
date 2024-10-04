@@ -9,8 +9,11 @@ export default function NavBar() {
     { label: 'INICIO', path: '/' },
     { label: 'GESTOS', path: '/gestos' },
     { label: 'INTENTALO', path: '/intentalo' },
+    { label: 'COMO FUNCIONA', path: '/como_funciona' },
     { label: 'SOBRE NOSOTROS', path: '/aboutus' },
-    { label: 'CONTACTANOS', path: '/contact' }
+    { label: 'CONTACTANOS', path: '/contact' },
+    
+
     
   ];
 

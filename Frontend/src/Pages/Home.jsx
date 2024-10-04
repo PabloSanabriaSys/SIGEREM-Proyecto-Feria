@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className=" p-0 w-full bg-background">
       <div className="bg-black h-screen grid grid-cols-1 md:grid-cols-2">
-        <div className="p-4 flex flex-col justify-center items-start text-center md:text-left">
+        <div className="p-4 flex flex-col justify-center items-center text-center md:text-left">
           <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white">
             Reconocimiento y
             <br className="sm:block hidden" />{" "}
@@ -25,7 +25,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="flex items-center p-4">
+        <div className="flex items-center justify-center p-4">
           <video className="w-full sm:max-w-xs md:max-w-md lg:max-w-lg h-auto" autoPlay loop muted>
             <source src="https://video.wixstatic.com/video/61098f_2eab1bc7d0b9424cad87d3965803bf52/720p/mp4/file.mp4" type="video/mp4" />
             Tu navegador no soporta el elemento de video.

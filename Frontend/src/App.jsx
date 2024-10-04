@@ -12,7 +12,8 @@ import Intentalo from './pages/Intentalo';
 import Nosotros from './pages/Nosotros';
 import Contactanos from './pages/Contactanos';
 import VerGesto from './pages/VerGesto';
-import Home from './Pages/Home';
+import Home from './pages/Home';
+import ComoFunciona from './pages/ComoFunciona';
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         {
           path:"gestos/:id",
           element:<VerGesto/>
+        },
+        {
+          path:"como_funciona",
+          element:<ComoFunciona/>
         }
         
       ]

@@ -8,8 +8,11 @@ const VerGesto = () => {
     const { id } = useParams();  // Obtener el ID del gesto desde la URL
     const location = useLocation();  // Obtener el estado pasado desde Link
     const { title } = location.state || {};  // Extraer el título del estado
-    const gesture = files.find(file => file.url === id);
+    const [prediccion, setPrediccion] = useState("-");
 
+     // Buscar el gesto correspondiente en el array 'files'
+     const gesture = files.find(file => file.url === id);
+ 
     // Si no se encuentra el gesto, puedes manejarlo aquí
     const dialogContent = gesture ? gesture.dialogContent : 'Información no disponible.';
 
@@ -26,8 +29,7 @@ const VerGesto = () => {
                     <h1 className="text-2xl text-center font-bold sm:text-3xl md:text-5xl lg:text-5xl/none p-4">
                         GESTO: {title}
                     </h1>
-                    
-                    
+                    <CameraRecognition prediccion={prediccion} setPrediccion={setPrediccion} modelo={id}/>
                 </div>
                 
                 
