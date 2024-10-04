@@ -9,10 +9,14 @@ const VerGesto = () => {
     const location = useLocation();  // Obtener el estado pasado desde Link
     const { title } = location.state || {};  // Extraer el título del estado
     const [prediccion, setPrediccion] = useState("-");
+    const nombre = {
+        0: "Incorrecto",
+        1: "Correcto",
+        100: "no_reconocido"
+    };
+    // Buscar el gesto correspondiente en el array 'files'
+    const gesture = files.find(file => file.url === id);
 
-     // Buscar el gesto correspondiente en el array 'files'
-     const gesture = files.find(file => file.url === id);
- 
     // Si no se encuentra el gesto, puedes manejarlo aquí
     const dialogContent = gesture ? gesture.dialogContent : 'Información no disponible.';
 
@@ -21,7 +25,7 @@ const VerGesto = () => {
             <div className='h-screen grid justify-center items-center justify-items-center'>
                 <div className='grid justify-items-strech '>
                     <div className=' justify-self-end '>
-                        <InfoDialog 
+                        <InfoDialog
                             title={title}  // Pasa el título al InfoDialog
                             content={dialogContent}  // Pasa el contenido al InfoDialog
                         />
@@ -29,16 +33,13 @@ const VerGesto = () => {
                     <h1 className="text-2xl text-center font-bold sm:text-3xl md:text-5xl lg:text-5xl/none p-4">
                         GESTO: {title}
                     </h1>
-                    <CameraRecognition prediccion={prediccion} setPrediccion={setPrediccion} modelo={id}/>
                 </div>
-                
-                
+
+
                 <div className='grid  md:grid-cols-2  justify-items-center'>
                     <div className='p-3'>
-                        <h1 className=''>
-                        VIDEO
-                        </h1>
-                        <CameraRecognition />
+
+                        <CameraRecognition prediccion={prediccion} setPrediccion={setPrediccion} modelo={id} />
                     </div>
                     <div className="flex  flex-col justify-center items-center italic">
                         <h1 className='items-center'>Imite la imagen que se encuentra abajo 👇</h1>
@@ -49,6 +50,9 @@ const VerGesto = () => {
                         />
                     </div>
                 </div>
+                <p>
+                    {nombre[prediccion]}
+                </p>
             </div>
         </div>
 
