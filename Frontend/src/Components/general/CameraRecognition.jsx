@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 
-const CameraRecognition = ({prediccion, setPrediccion}) => {
-  const WS_URL = "ws://localhost:8000/recognition";
+const CameraRecognition = ({prediccion, setPrediccion, modelo="todas"}) => {
+  const WS_URL = "ws://localhost:8000/recognition/"+modelo;
   const webcamRef = useRef(null);
   const wsRef = useRef(null);
   const [isCapturing, setIsCapturing] = useState(true);

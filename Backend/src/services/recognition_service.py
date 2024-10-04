@@ -95,7 +95,7 @@ class Reconocimiento:
             return max_manos
         
         
-    def predecir(self, frame):
+    def predecir(self, frame, max_manos):
         height, width, _ = frame.shape
         frame = cv2.flip(frame, 1)
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -202,6 +202,10 @@ class Reconocimiento:
             max_manos = self.contar_manos(modelo)
             self.inicializar_modelos(max_manos)
             
+            funcion_prediccion = self.predecir_un_modelo
+            if modelo == "src/modelos/todas.pt":
+                funcion_prediccion = self.predecir
+            
             while True:
                 try:
                     data = await websocket.receive_text()
@@ -218,7 +222,7 @@ class Reconocimiento:
                         await websocket.send_json({"error": "Imagen inválida"})
                         continue
                     
-                    self.predecir(frame)
+                    funcion_prediccion(frame, max_manos)
                     
                     await websocket.send_json({"prediccion": int(self.prediccion)})
                 except Exception as e:
@@ -226,3 +230,59 @@ class Reconocimiento:
                     await websocket.send_json({"error": str(e)})
         finally:
             self.limpiar()
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+    def predecir_un_modelo(self, frame, max_manos):
+        height, width, _ = frame.shape
+        frame = cv2.flip(frame, 1)
+        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        # Face
+        results_face = self.face_detection.process(frame_rgb)
+        # Hands
+        results = self.hands.process(frame_rgb)
+
+        if results.multi_hand_landmarks is not None and results_face.detections is not None:
+            for detection in results_face.detections:
+                self.pintar_cara(frame, detection, width, height)
+                break
+
+            cont = 0
+            for hand_landmarks in results.multi_hand_landmarks:
+                cont+=1
+                self.recuperar_coordenadas(hand_landmarks, width, height)
+
+                self.pintar_mano(frame,hand_landmarks)
+                distancia_referencia = self.calcular_distancia()
+                self.normalizar( distancia_referencia)
+                if (time.time() - self.tiempo_ini >= 0.5 and cont==max_manos):
+                    if max_manos==1:
+                        aux = np.concatenate((self.x_coordinates, self.y_coordinates),axis=None).reshape(1,-1)  
+                    else:
+                        if(results.multi_handedness[0].classification[0].label=="Right"):
+                            aux_x = np.concatenate((aux_x, self.x_coordinates),axis=None) 
+                            aux_y = np.concatenate((aux_y, self.y_coordinates),axis=None)
+                        else:
+                            aux_x = np.concatenate((self.x_coordinates, aux_x),axis=None) 
+                            aux_y = np.concatenate((self.y_coordinates, aux_y),axis=None)
+                            
+                        aux = np.concatenate((aux_x, aux_y),axis=None).reshape(1,-1) 
+                    
+                    i = torch.Tensor(aux.reshape(1, -1))
+                    i = Variable(i)
+                    predict = rna.softmax(self.model_ft(i), dim=1)
+                    self.prediccion = predict.argmax().item()
+                    self.tiempo_ini = time.time()
+                
+                aux_x,aux_y = self.x_coordinates, self.y_coordinates 
+        else:
+            self.prediccion = 100

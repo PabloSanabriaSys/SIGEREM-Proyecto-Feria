@@ -5,6 +5,7 @@ const VerGesto = () => {
     const { id } = useParams();  // Obtener el ID del gesto desde la URL
     const location = useLocation();  // Obtener el estado pasado desde Link
     const { title } = location.state || {};  // Extraer el título del estado
+    const [prediccion, setPrediccion] = useState("-");
 
 
     return (
@@ -18,7 +19,7 @@ const VerGesto = () => {
                     <h1 className=''>
                         VIDEO
                     </h1>
-                    <CameraRecognition />
+                    <CameraRecognition prediccion={prediccion} setPrediccion={setPrediccion} modelo={id}/>
                 </div>
                 <div className="flex  flex-col justify-center items-center italic">
                     <h1 className='items-center'>Imite la imagen que se encuentra abajo 👇</h1>
