@@ -21,7 +21,7 @@ const VerGesto = () => {
     const dialogContent = gesture ? gesture.dialogContent : 'Información no disponible.';
 
     return (
-        <div className="bg-background p-0 w-screen ">
+        <div className="bg-background p-0  ">
             <div className='h-screen grid justify-center items-center justify-items-center'>
                 <div className='grid justify-items-strech '>
                     <div className=' justify-self-end '>
