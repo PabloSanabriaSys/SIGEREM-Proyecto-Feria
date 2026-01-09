@@ -1,7 +1,7 @@
 # SIREGEM - Sistema de Reconocimiento de Gestos Militares
 
 <div align="center">
-    <video src="media/logo.mp4" alt="logo" width="280" autoplay loop muted playsinline>
+    <img src="media/logo.png" alt="logo" width="280" >
 </div>
 
 <div align="center">
@@ -91,11 +91,6 @@ Las dependencias están en el mismo repositorio.
 <div align="center">
     <img src="media/1.png" alt="" width="48%">
     <img src="media/2.png" alt="" width="48%">
-</div>
-
-<div align="center">
-    <img src="Media/screenshot3.png" alt="" width="48%">
-    <img src="Media/screenshot4.png" alt="" width="48%">
 </div>
 
 ## Licencia
